@@ -1,0 +1,31 @@
+<div class="contenedor normal">
+  <p>
+    <input [(ngModel)]="nombre" (keydown.shift.space)="poneMayuscula($event)" placeholder="Nombre" />
+    <button (click)="poneMayuscula()">⬆️</button>
+  </p>
+  <p>
+    <button (click)="reducir()">-</button>
+    <span> {{edad}} años </span>
+    <button (click)="incrementar()">+</button>
+  </p>
+  <div>Validando edad...</div>
+
+  <div *ngIf="esMayorDeEdad">ES MAYOR DE EDAD</div>
+
+  <button (click)="resetea()">Resetear</button>
+  <button [disabled]="edad<18 || !nombre.trim()" (click)="inserta()">Insertar</button>
+</div>
+<ng-container *ngIf="this.driverS.data.length==0;else elseBlock">
+  NO hay personas
+</ng-container>
+<ng-template #elseBlock>
+  <table border="1">
+
+    <tr *ngFor="let persona of driverS.data;index as i">
+      <td>Persona #{{ i + 1 }}</td>
+      <td>{{persona.nombre}}</td>
+      <td>{{persona.edad}}</td>
+    </tr>
+
+  </table>
+</ng-template>
